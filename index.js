@@ -16,6 +16,9 @@ methode 4 using sql file than same cli terminal use database than write source f
 
 const { faker } = require('@faker-js/faker');
 const mysql = require('mysql2');
+
+
+
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -64,16 +67,17 @@ let q="insert into newstudent (id,username,email,password) values ?;"
 
 let data=[]
 for(let i=1;i<=100;i++){
-  console.log(getrandomuser())
+  data.push(getrandomuser())
 }
-
-
-
-
-
-
-
-
+try{
+connection.query(q,[data],(err,result)=>{
+  if(err) throw err
+  console.log(result)
+})
+}
+catch(err){
+  console.log(err)
+}
 
 connection.end()
 
