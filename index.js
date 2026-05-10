@@ -19,6 +19,10 @@ const mysql = require('mysql2');
 const express=require("express")
 const app=express()
 const port=8080
+const path=require("path")
+
+app.set("view engine","ejs")
+app.set("views",path.join(__dirname,"/views"))
 
 
 const connection = mysql.createConnection({
@@ -86,7 +90,18 @@ let getrandomuser=()=> {
 
 
 app.get("/",(req,res)=>{
-  res.send("welcome to home page")
+  let q="select count(*) from newstudent"
+  try{
+connection.query(q,(err,result)=>{
+  if(err) throw err
+  let count=result[0]["count(*)"]
+  res.render("home.ejs",{count})
+})
+}
+catch(err){
+  console.log(err)
+  res.send("some error in db")
+}
 })
 
 app.listen(port,()=>{
