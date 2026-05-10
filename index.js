@@ -35,29 +35,54 @@ catch(err){
 }*/
 
 
-// inserting new data
+/*  inserting new data
 let q="insert into newstudent (id,username,email,password) values ?;"
-let newstudentsss=[["343d","newuser1d","ddeep@gmail.com","dabc"],["343b","newuser1b","bdeep@gmail.com","babc"]]
+let newstudentsss=[["343d","newuser1d","ddeep@gmail.com","dabc"],["343b","newuser1b","bdeep@gmail.com","babc"]]*/
 
-try{
-connection.query(q,[newstudentsss
-],(err,result)=>{
-  if(err) throw err
-  console.log(result)
-})
+// try{
+// connection.query(q,[newstudentsss],(err,result)=>{
+//   if(err) throw err
+//   console.log(result)
+// })
+// }
+// catch(err){
+//   console.log(err)
+// }
+
+
+/*insert data in bulk by faker*/
+
+let getrandomuser=()=> {
+ return [
+   faker.string.uuid(),
+   faker.internet.username(),
+   faker.internet.email(),
+   faker.internet.password(),
+ ];
 }
-catch(err){
-  console.log(err)
+let q="insert into newstudent (id,username,email,password) values ?;"
+
+let data=[]
+for(let i=1;i<=100;i++){
+  console.log(getrandomuser())
 }
+
+
+
+
+
+
+
+
 
 connection.end()
 
-let getrandomuser=()=> {
- return {
-   userId: faker.string.uuid(),
-   username: faker.internet.username(),
-   email: faker.internet.email(),
-   password: faker.internet.password(),
- };
-}
+// let getrandomuser=()=> {
+//  return {
+//    userId: faker.string.uuid(),
+//    username: faker.internet.username(),
+//    email: faker.internet.email(),
+//    password: faker.internet.password(),
+//  };
+// }
 // console.log(getrandomuser())
