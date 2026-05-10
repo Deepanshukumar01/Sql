@@ -16,7 +16,9 @@ methode 4 using sql file than same cli terminal use database than write source f
 
 const { faker } = require('@faker-js/faker');
 const mysql = require('mysql2');
-
+const express=require("express")
+const app=express()
+const port=8080
 
 
 const connection = mysql.createConnection({
@@ -52,9 +54,6 @@ let newstudentsss=[["343d","newuser1d","ddeep@gmail.com","dabc"],["343b","newuse
 //   console.log(err)
 // }
 
-
-/*insert data in bulk by faker*/
-
 let getrandomuser=()=> {
  return [
    faker.string.uuid(),
@@ -63,23 +62,36 @@ let getrandomuser=()=> {
    faker.internet.password(),
  ];
 }
-let q="insert into newstudent (id,username,email,password) values ?;"
 
-let data=[]
-for(let i=1;i<=100;i++){
-  data.push(getrandomuser())
-}
-try{
-connection.query(q,[data],(err,result)=>{
-  if(err) throw err
-  console.log(result)
+
+/*insert data in bulk by faker*/
+
+// let q="insert into newstudent (id,username,email,password) values ?;"
+
+// let data=[]
+// for(let i=1;i<=100;i++){
+//   data.push(getrandomuser())
+// }
+
+// try{
+// connection.query(q,[data],(err,result)=>{
+//   if(err) throw err
+//   console.log(result)
+// })
+// }
+// catch(err){
+//   console.log(err)
+// }
+// connection.end()
+
+
+app.get("/",(req,res)=>{
+  res.send("welcome to home page")
 })
-}
-catch(err){
-  console.log(err)
-}
 
-connection.end()
+app.listen(port,()=>{
+  console.log(`${port} is working`)
+})
 
 // let getrandomuser=()=> {
 //  return {
