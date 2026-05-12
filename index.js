@@ -104,6 +104,20 @@ catch(err){
 }
 })
 
+app.get("/newstudent",(req,res)=>{
+  let q="select * from newstudent"
+  try{
+connection.query(q,(err,result)=>{
+  if(err) throw err
+  res.render("newstudent.ejs",{result})
+})
+}
+catch(err){
+  console.log(err)
+  res.send("some error in db")
+}
+})
+
 app.listen(port,()=>{
   console.log(`${port} is working`)
 })
